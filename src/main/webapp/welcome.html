@@ -1,0 +1,1175 @@
+<html>
+	<head>
+	    <link rel='stylesheet' href='webjars/bootstrap/3.3.4/css/bootstrap.min.css'>
+	    <link rel='stylesheet' href='webjars/bootstrap/3.3.4/css/bootstrap-theme.min.css'>
+	</head>
+	<style>
+		body {
+		  padding-top: 20px;
+		  padding-bottom: 20px;
+		}
+		
+		.navbar {
+		  margin-bottom: 20px;
+		}
+		
+		.jumbotron {
+		  background-color: #F9D1AA;
+		}    		    	
+	</style>
+    <script type='text/javascript' src='webjars/jquery/2.0.3/jquery.min.js'>
+	</script>
+	<script type='text/javascript' src='webjars/bootstrap/3.3.4/js/bootstrap.min.js'>
+	</script>
+	<body>
+	    <div class="modal fade" id="pleaseWaitDialog" data-backdrop="static" data-keyboard="false" data-show="false">
+	        <div class="modal-dialog">
+	            <div class="modal-content">
+	                <div class="modal-header">
+	                    <h1>Retrieving information from server...</h1>
+	                </div>
+	                <div class="modal-body">
+	                    <div class="progress progress-striped active">
+	                        <div class="progress-bar progress-bar-info" style="width: 100%;">
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	    <div id="infoDialog" class="modal fade">
+	        <div class="modal-dialog">
+	            <div class="modal-content">
+	                <!-- dialog body -->
+	                <div class="modal-body" id="infoDialogContent">
+	                </div>
+	                <!-- dialog buttons -->
+	                <div class="modal-footer">
+	                    <button type="button" class="btn btn-primary">OK</button>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	    <script type="text/javascript">
+			var myApp;
+			myApp = myApp || (function() {
+			
+				var pleaseWaitDiv = $('#pleaseWaitDialog');
+				var infoDiv = $('#infoDialog');
+				return {
+					showPleaseWait : function() {
+						pleaseWaitDiv.modal('show');
+					},
+					hidePleaseWait : function() {
+						pleaseWaitDiv.modal('hide');
+					},
+					showMessage : function(msg) {
+						$("#infoDialogContent").html(msg);
+						infoDiv.modal('show');
+					}
+				};
+			})();
+			
+			$("#infoDialog").on("show", function() { 
+				$("#infoDialog a.btn").on("click", function(e) {
+					$("#infoDialog").modal('hide'); 
+				});
+			});
+		</script>
+	    <div class="container">
+	        <nav class="navbar navbar-default">
+	            <div class="container-fluid">
+	                <div class="navbar-header">
+	                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+	                        <span class="sr-only">Toggle navigation</span>
+	                        <span class="icon-bar">
+	                        </span>
+	                        <span class="icon-bar">
+	                        </span>
+	                        <span class="icon-bar">
+	                        </span>
+	                    </button>
+	                    <a class="navbar-brand" href="#">Gogs Swagger Petstore</a>
+	                </div>
+	                <div id="navbar" class="navbar-collapse collapse">
+	                    <ul class="nav navbar-nav">
+	                        <li class="active">
+	                            <a href="#">Home</a>
+	                        </li>
+	                        <li>
+	                            <a href="#">About</a>
+	                        </li>
+	                        <li>
+	                            <a href="#">Contact Group1</a>
+	                        </li>
+	                        <li class="dropdown">
+	                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret">
+	                        </span>
+	                    </a>
+	                    <ul class="dropdown-menu" role="menu">
+	                        <li class="dropdown-header">Operations</li>
+	                        		                        						  <li>
+	                        <a href="#">updatePet</a>
+	                    </li>
+	                        		                        						  <li>
+	                        <a href="#">addPet</a>
+	                    </li>
+	                        		                        						  <li>
+	                        <a href="#">getUserByName</a>
+	                    </li>
+	                        		                        						  <li>
+	                        <a href="#">updateUser</a>
+	                    </li>
+	                        		                        						  <li>
+	                        <a href="#">deleteUser</a>
+	                    </li>
+	                        		                        						  <li>
+	                        <a href="#">findPetsByStatus</a>
+	                    </li>
+	                        		                        						  <li>
+	                        <a href="#">createUsersWithListInput</a>
+	                    </li>
+	                        		                        						  <li>
+	                        <a href="#">uploadFile</a>
+	                    </li>
+	                        		                        						  <li>
+	                        <a href="#">getInventory</a>
+	                    </li>
+	                        		                        						  <li>
+	                        <a href="#">loginUser</a>
+	                    </li>
+	                        		                        						  <li>
+	                        <a href="#">createUser</a>
+	                    </li>
+	                        		                        						  <li>
+	                        <a href="#">createUsersWithArrayInput</a>
+	                    </li>
+	                        		                        						  <li>
+	                        <a href="#">findPetsByTags</a>
+	                    </li>
+	                        		                        						  <li>
+	                        <a href="#">placeOrder</a>
+	                    </li>
+	                        		                        						  <li>
+	                        <a href="#">logoutUser</a>
+	                    </li>
+	                        		                        						  <li>
+	                        <a href="#">getPetById</a>
+	                    </li>
+	                        		                        						  <li>
+	                        <a href="#">updatePetWithForm</a>
+	                    </li>
+	                        		                        						  <li>
+	                        <a href="#">deletePet</a>
+	                    </li>
+	                        		                        						  <li>
+	                        <a href="#">getOrderById</a>
+	                    </li>
+	                        		                        						  <li>
+	                        <a href="#">deleteOrder</a>
+	                    </li>
+	                    		                    						  <li class="divider">
+	                </li>
+	                <li class="dropdown-header">More Details</li>
+	                <li>
+	                    <a href="#">Test results</a>
+	                </li>
+	            </ul>
+	        </li>
+	    </ul>
+	</div>
+	<!--/.nav-collapse -->
+	</div>
+	<!--/.container-fluid -->
+	</nav>
+	<div class="jumbotron">
+	    <h1>Gogs Swagger Petstore</h1>
+	    <p>GOGS: This is a sample server Petstore server.  You can find out more about Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).  For this sample, you can use the api key `special-key` to test the authorization filters.</p>
+	</div>
+						  
+	<div class="col-lg-12">
+		<h4>updatePet</h4>
+		<p></p>
+		<form class="navbar-form navbar-left" id="updatePet" role="search">
+			<div class="input-group">
+			    <span class="input-group-addon" id="basic-addon1">body</span>
+			    <input type="text" class="form-control" name="body" placeholder="body" aria-describedby="basic-addon1">
+			    </input>
+			</div>
+			<button type="submit" class="btn btn-success">Run <span class="glyphicon glyphicon-play-circle" aria-hidden="true">
+				</span>
+			</button>
+		</form>
+	</div>
+	<script>
+		$("#updatePet").submit(function(event) {
+			event.preventDefault();
+			myApp.showPleaseWait();
+		
+			var uri = "api?";
+			$.each($('#updatePet').serializeArray(), function(i, field) {
+				if(uri.charAt(uri.lastIndexOf('/') + 1) == '{' || uri.charAt(uri.lastIndexOf('/') == '?')) {
+					uri = uri.substring(0, uri.lastIndexOf('/')) + uri.substring(uri.lastIndexOf('/') + 1, uri.length);
+				}
+				uri = uri.replace('{' + field.name + '}', '');
+				uri = uri + field.name + "=" + field.value + "&";
+			});
+					
+			uri = uri.substring(0, uri.length-1);
+		
+			$.ajax({
+			  url : uri,
+			  type: 'PUT',
+			  error: function() {
+				alert("Submission failure");
+				myApp.hidePleaseWait();
+			  },
+			  
+			  complete: function(res) {
+			  },
+			  
+			  success: function(res) {
+				myApp.hidePleaseWait();
+				myApp.showMessage(res);
+			  }
+			});        	  
+		  });
+	  </script>
+	<div class="col-lg-12">
+		<h4>addPet</h4>
+		<p></p>
+		<form class="navbar-form navbar-left" id="addPet" role="search">
+			<div class="input-group">
+			    <span class="input-group-addon" id="basic-addon1">body</span>
+			    <input type="text" class="form-control" name="body" placeholder="body" aria-describedby="basic-addon1">
+			    </input>
+			</div>
+			<button type="submit" class="btn btn-success">Run <span class="glyphicon glyphicon-play-circle" aria-hidden="true">
+				</span>
+			</button>
+		</form>
+	</div>
+	<script>
+		$("#addPet").submit(function(event) {
+			event.preventDefault();
+			myApp.showPleaseWait();
+		
+			var uri = "api?";
+			$.each($('#addPet').serializeArray(), function(i, field) {
+				if(uri.charAt(uri.lastIndexOf('/') + 1) == '{' || uri.charAt(uri.lastIndexOf('/') == '?')) {
+					uri = uri.substring(0, uri.lastIndexOf('/')) + uri.substring(uri.lastIndexOf('/') + 1, uri.length);
+				}
+				uri = uri.replace('{' + field.name + '}', '');
+				uri = uri + field.name + "=" + field.value + "&";
+			});
+					
+			uri = uri.substring(0, uri.length-1);
+		
+			$.ajax({
+			  url : uri,
+			  type: 'POST',
+			  error: function() {
+				alert("Submission failure");
+				myApp.hidePleaseWait();
+			  },
+			  
+			  complete: function(res) {
+			  },
+			  
+			  success: function(res) {
+				myApp.hidePleaseWait();
+				myApp.showMessage(res);
+			  }
+			});        	  
+		  });
+	  </script>
+	<div class="col-lg-12">
+		<h4>getUserByName</h4>
+		<p></p>
+		<form class="navbar-form navbar-left" id="getUserByName" role="search">
+			<div class="input-group">
+			    <span class="input-group-addon" id="basic-addon1">username</span>
+			    <input type="text" class="form-control" name="username" placeholder="username" aria-describedby="basic-addon1">
+			    </input>
+			</div>
+			<button type="submit" class="btn btn-success">Run <span class="glyphicon glyphicon-play-circle" aria-hidden="true">
+				</span>
+			</button>
+		</form>
+	</div>
+	<script>
+		$("#getUserByName").submit(function(event) {
+			event.preventDefault();
+			myApp.showPleaseWait();
+		
+			var uri = "api?";
+			$.each($('#getUserByName').serializeArray(), function(i, field) {
+				if(uri.charAt(uri.lastIndexOf('/') + 1) == '{' || uri.charAt(uri.lastIndexOf('/') == '?')) {
+					uri = uri.substring(0, uri.lastIndexOf('/')) + uri.substring(uri.lastIndexOf('/') + 1, uri.length);
+				}
+				uri = uri.replace('{' + field.name + '}', '');
+				uri = uri + field.name + "=" + field.value + "&";
+			});
+					
+			uri = uri.substring(0, uri.length-1);
+		
+			$.ajax({
+			  url : uri,
+			  type: 'GET',
+			  error: function() {
+				alert("Submission failure");
+				myApp.hidePleaseWait();
+			  },
+			  
+			  complete: function(res) {
+			  },
+			  
+			  success: function(res) {
+				myApp.hidePleaseWait();
+				myApp.showMessage(res);
+			  }
+			});        	  
+		  });
+	  </script>
+	<div class="col-lg-12">
+		<h4>updateUser</h4>
+		<p>This can only be done by the logged in user.</p>
+		<form class="navbar-form navbar-left" id="updateUser" role="search">
+			<div class="input-group">
+			    <span class="input-group-addon" id="basic-addon1">username</span>
+			    <input type="text" class="form-control" name="username" placeholder="username" aria-describedby="basic-addon1">
+			    </input>
+			</div>
+			<div class="input-group">
+			    <span class="input-group-addon" id="basic-addon1">body</span>
+			    <input type="text" class="form-control" name="body" placeholder="body" aria-describedby="basic-addon1">
+			    </input>
+			</div>
+			<button type="submit" class="btn btn-success">Run <span class="glyphicon glyphicon-play-circle" aria-hidden="true">
+				</span>
+			</button>
+		</form>
+	</div>
+	<script>
+		$("#updateUser").submit(function(event) {
+			event.preventDefault();
+			myApp.showPleaseWait();
+		
+			var uri = "api?";
+			$.each($('#updateUser').serializeArray(), function(i, field) {
+				if(uri.charAt(uri.lastIndexOf('/') + 1) == '{' || uri.charAt(uri.lastIndexOf('/') == '?')) {
+					uri = uri.substring(0, uri.lastIndexOf('/')) + uri.substring(uri.lastIndexOf('/') + 1, uri.length);
+				}
+				uri = uri.replace('{' + field.name + '}', '');
+				uri = uri + field.name + "=" + field.value + "&";
+			});
+					
+			uri = uri.substring(0, uri.length-1);
+		
+			$.ajax({
+			  url : uri,
+			  type: 'PUT',
+			  error: function() {
+				alert("Submission failure");
+				myApp.hidePleaseWait();
+			  },
+			  
+			  complete: function(res) {
+			  },
+			  
+			  success: function(res) {
+				myApp.hidePleaseWait();
+				myApp.showMessage(res);
+			  }
+			});        	  
+		  });
+	  </script>
+	<div class="col-lg-12">
+		<h4>deleteUser</h4>
+		<p>This can only be done by the logged in user.</p>
+		<form class="navbar-form navbar-left" id="deleteUser" role="search">
+			<div class="input-group">
+			    <span class="input-group-addon" id="basic-addon1">username</span>
+			    <input type="text" class="form-control" name="username" placeholder="username" aria-describedby="basic-addon1">
+			    </input>
+			</div>
+			<button type="submit" class="btn btn-success">Run <span class="glyphicon glyphicon-play-circle" aria-hidden="true">
+				</span>
+			</button>
+		</form>
+	</div>
+	<script>
+		$("#deleteUser").submit(function(event) {
+			event.preventDefault();
+			myApp.showPleaseWait();
+		
+			var uri = "api?";
+			$.each($('#deleteUser').serializeArray(), function(i, field) {
+				if(uri.charAt(uri.lastIndexOf('/') + 1) == '{' || uri.charAt(uri.lastIndexOf('/') == '?')) {
+					uri = uri.substring(0, uri.lastIndexOf('/')) + uri.substring(uri.lastIndexOf('/') + 1, uri.length);
+				}
+				uri = uri.replace('{' + field.name + '}', '');
+				uri = uri + field.name + "=" + field.value + "&";
+			});
+					
+			uri = uri.substring(0, uri.length-1);
+		
+			$.ajax({
+			  url : uri,
+			  type: 'DELETE',
+			  error: function() {
+				alert("Submission failure");
+				myApp.hidePleaseWait();
+			  },
+			  
+			  complete: function(res) {
+			  },
+			  
+			  success: function(res) {
+				myApp.hidePleaseWait();
+				myApp.showMessage(res);
+			  }
+			});        	  
+		  });
+	  </script>
+	<div class="col-lg-12">
+		<h4>findPetsByStatus</h4>
+		<p>Multiple status values can be provided with comma separated strings</p>
+		<form class="navbar-form navbar-left" id="findPetsByStatus" role="search">
+			<div class="input-group">
+			    <span class="input-group-addon" id="basic-addon1">status</span>
+			    <input type="text" class="form-control" name="status" placeholder="status" aria-describedby="basic-addon1">
+			    </input>
+			</div>
+			<button type="submit" class="btn btn-success">Run <span class="glyphicon glyphicon-play-circle" aria-hidden="true">
+				</span>
+			</button>
+		</form>
+	</div>
+	<script>
+		$("#findPetsByStatus").submit(function(event) {
+			event.preventDefault();
+			myApp.showPleaseWait();
+		
+			var uri = "api?";
+			$.each($('#findPetsByStatus').serializeArray(), function(i, field) {
+				if(uri.charAt(uri.lastIndexOf('/') + 1) == '{' || uri.charAt(uri.lastIndexOf('/') == '?')) {
+					uri = uri.substring(0, uri.lastIndexOf('/')) + uri.substring(uri.lastIndexOf('/') + 1, uri.length);
+				}
+				uri = uri.replace('{' + field.name + '}', '');
+				uri = uri + field.name + "=" + field.value + "&";
+			});
+					
+			uri = uri.substring(0, uri.length-1);
+		
+			$.ajax({
+			  url : uri,
+			  type: 'GET',
+			  error: function() {
+				alert("Submission failure");
+				myApp.hidePleaseWait();
+			  },
+			  
+			  complete: function(res) {
+			  },
+			  
+			  success: function(res) {
+				myApp.hidePleaseWait();
+				myApp.showMessage(res);
+			  }
+			});        	  
+		  });
+	  </script>
+	<div class="col-lg-12">
+		<h4>createUsersWithListInput</h4>
+		<p></p>
+		<form class="navbar-form navbar-left" id="createUsersWithListInput" role="search">
+			<div class="input-group">
+			    <span class="input-group-addon" id="basic-addon1">body</span>
+			    <input type="text" class="form-control" name="body" placeholder="body" aria-describedby="basic-addon1">
+			    </input>
+			</div>
+			<button type="submit" class="btn btn-success">Run <span class="glyphicon glyphicon-play-circle" aria-hidden="true">
+				</span>
+			</button>
+		</form>
+	</div>
+	<script>
+		$("#createUsersWithListInput").submit(function(event) {
+			event.preventDefault();
+			myApp.showPleaseWait();
+		
+			var uri = "api?";
+			$.each($('#createUsersWithListInput').serializeArray(), function(i, field) {
+				if(uri.charAt(uri.lastIndexOf('/') + 1) == '{' || uri.charAt(uri.lastIndexOf('/') == '?')) {
+					uri = uri.substring(0, uri.lastIndexOf('/')) + uri.substring(uri.lastIndexOf('/') + 1, uri.length);
+				}
+				uri = uri.replace('{' + field.name + '}', '');
+				uri = uri + field.name + "=" + field.value + "&";
+			});
+					
+			uri = uri.substring(0, uri.length-1);
+		
+			$.ajax({
+			  url : uri,
+			  type: 'POST',
+			  error: function() {
+				alert("Submission failure");
+				myApp.hidePleaseWait();
+			  },
+			  
+			  complete: function(res) {
+			  },
+			  
+			  success: function(res) {
+				myApp.hidePleaseWait();
+				myApp.showMessage(res);
+			  }
+			});        	  
+		  });
+	  </script>
+	<div class="col-lg-12">
+		<h4>uploadFile</h4>
+		<p></p>
+		<form class="navbar-form navbar-left" id="uploadFile" role="search">
+			<div class="input-group">
+			    <span class="input-group-addon" id="basic-addon1">petId</span>
+			    <input type="text" class="form-control" name="petId" placeholder="petId" aria-describedby="basic-addon1">
+			    </input>
+			</div>
+			<div class="input-group">
+			    <span class="input-group-addon" id="basic-addon1">additionalMetadata</span>
+			    <input type="text" class="form-control" name="additionalMetadata" placeholder="additionalMetadata" aria-describedby="basic-addon1">
+			    </input>
+			</div>
+			<div class="input-group">
+			    <span class="input-group-addon" id="basic-addon1">file</span>
+			    <input type="text" class="form-control" name="file" placeholder="file" aria-describedby="basic-addon1">
+			    </input>
+			</div>
+			<button type="submit" class="btn btn-success">Run <span class="glyphicon glyphicon-play-circle" aria-hidden="true">
+				</span>
+			</button>
+		</form>
+	</div>
+	<script>
+		$("#uploadFile").submit(function(event) {
+			event.preventDefault();
+			myApp.showPleaseWait();
+		
+			var uri = "api?";
+			$.each($('#uploadFile').serializeArray(), function(i, field) {
+				if(uri.charAt(uri.lastIndexOf('/') + 1) == '{' || uri.charAt(uri.lastIndexOf('/') == '?')) {
+					uri = uri.substring(0, uri.lastIndexOf('/')) + uri.substring(uri.lastIndexOf('/') + 1, uri.length);
+				}
+				uri = uri.replace('{' + field.name + '}', '');
+				uri = uri + field.name + "=" + field.value + "&";
+			});
+					
+			uri = uri.substring(0, uri.length-1);
+		
+			$.ajax({
+			  url : uri,
+			  type: 'POST',
+			  error: function() {
+				alert("Submission failure");
+				myApp.hidePleaseWait();
+			  },
+			  
+			  complete: function(res) {
+			  },
+			  
+			  success: function(res) {
+				myApp.hidePleaseWait();
+				myApp.showMessage(res);
+			  }
+			});        	  
+		  });
+	  </script>
+	<div class="col-lg-12">
+		<h4>getInventory</h4>
+		<p>Returns a map of status codes to quantities</p>
+		<form class="navbar-form navbar-left" id="getInventory" role="search">
+			<button type="submit" class="btn btn-success">Run <span class="glyphicon glyphicon-play-circle" aria-hidden="true">
+				</span>
+			</button>
+		</form>
+	</div>
+	<script>
+		$("#getInventory").submit(function(event) {
+			event.preventDefault();
+			myApp.showPleaseWait();
+		
+			var uri = "api?";
+			$.each($('#getInventory').serializeArray(), function(i, field) {
+				if(uri.charAt(uri.lastIndexOf('/') + 1) == '{' || uri.charAt(uri.lastIndexOf('/') == '?')) {
+					uri = uri.substring(0, uri.lastIndexOf('/')) + uri.substring(uri.lastIndexOf('/') + 1, uri.length);
+				}
+				uri = uri.replace('{' + field.name + '}', '');
+				uri = uri + field.name + "=" + field.value + "&";
+			});
+					
+			uri = uri.substring(0, uri.length-1);
+		
+			$.ajax({
+			  url : uri,
+			  type: 'GET',
+			  error: function() {
+				alert("Submission failure");
+				myApp.hidePleaseWait();
+			  },
+			  
+			  complete: function(res) {
+			  },
+			  
+			  success: function(res) {
+				myApp.hidePleaseWait();
+				myApp.showMessage(res);
+			  }
+			});        	  
+		  });
+	  </script>
+	<div class="col-lg-12">
+		<h4>loginUser</h4>
+		<p></p>
+		<form class="navbar-form navbar-left" id="loginUser" role="search">
+			<div class="input-group">
+			    <span class="input-group-addon" id="basic-addon1">username</span>
+			    <input type="text" class="form-control" name="username" placeholder="username" aria-describedby="basic-addon1">
+			    </input>
+			</div>
+			<div class="input-group">
+			    <span class="input-group-addon" id="basic-addon1">password</span>
+			    <input type="text" class="form-control" name="password" placeholder="password" aria-describedby="basic-addon1">
+			    </input>
+			</div>
+			<button type="submit" class="btn btn-success">Run <span class="glyphicon glyphicon-play-circle" aria-hidden="true">
+				</span>
+			</button>
+		</form>
+	</div>
+	<script>
+		$("#loginUser").submit(function(event) {
+			event.preventDefault();
+			myApp.showPleaseWait();
+		
+			var uri = "api?";
+			$.each($('#loginUser').serializeArray(), function(i, field) {
+				if(uri.charAt(uri.lastIndexOf('/') + 1) == '{' || uri.charAt(uri.lastIndexOf('/') == '?')) {
+					uri = uri.substring(0, uri.lastIndexOf('/')) + uri.substring(uri.lastIndexOf('/') + 1, uri.length);
+				}
+				uri = uri.replace('{' + field.name + '}', '');
+				uri = uri + field.name + "=" + field.value + "&";
+			});
+					
+			uri = uri.substring(0, uri.length-1);
+		
+			$.ajax({
+			  url : uri,
+			  type: 'GET',
+			  error: function() {
+				alert("Submission failure");
+				myApp.hidePleaseWait();
+			  },
+			  
+			  complete: function(res) {
+			  },
+			  
+			  success: function(res) {
+				myApp.hidePleaseWait();
+				myApp.showMessage(res);
+			  }
+			});        	  
+		  });
+	  </script>
+	<div class="col-lg-12">
+		<h4>createUser</h4>
+		<p>This can only be done by the logged in user.</p>
+		<form class="navbar-form navbar-left" id="createUser" role="search">
+			<div class="input-group">
+			    <span class="input-group-addon" id="basic-addon1">body</span>
+			    <input type="text" class="form-control" name="body" placeholder="body" aria-describedby="basic-addon1">
+			    </input>
+			</div>
+			<button type="submit" class="btn btn-success">Run <span class="glyphicon glyphicon-play-circle" aria-hidden="true">
+				</span>
+			</button>
+		</form>
+	</div>
+	<script>
+		$("#createUser").submit(function(event) {
+			event.preventDefault();
+			myApp.showPleaseWait();
+		
+			var uri = "api?";
+			$.each($('#createUser').serializeArray(), function(i, field) {
+				if(uri.charAt(uri.lastIndexOf('/') + 1) == '{' || uri.charAt(uri.lastIndexOf('/') == '?')) {
+					uri = uri.substring(0, uri.lastIndexOf('/')) + uri.substring(uri.lastIndexOf('/') + 1, uri.length);
+				}
+				uri = uri.replace('{' + field.name + '}', '');
+				uri = uri + field.name + "=" + field.value + "&";
+			});
+					
+			uri = uri.substring(0, uri.length-1);
+		
+			$.ajax({
+			  url : uri,
+			  type: 'POST',
+			  error: function() {
+				alert("Submission failure");
+				myApp.hidePleaseWait();
+			  },
+			  
+			  complete: function(res) {
+			  },
+			  
+			  success: function(res) {
+				myApp.hidePleaseWait();
+				myApp.showMessage(res);
+			  }
+			});        	  
+		  });
+	  </script>
+	<div class="col-lg-12">
+		<h4>createUsersWithArrayInput</h4>
+		<p></p>
+		<form class="navbar-form navbar-left" id="createUsersWithArrayInput" role="search">
+			<div class="input-group">
+			    <span class="input-group-addon" id="basic-addon1">body</span>
+			    <input type="text" class="form-control" name="body" placeholder="body" aria-describedby="basic-addon1">
+			    </input>
+			</div>
+			<button type="submit" class="btn btn-success">Run <span class="glyphicon glyphicon-play-circle" aria-hidden="true">
+				</span>
+			</button>
+		</form>
+	</div>
+	<script>
+		$("#createUsersWithArrayInput").submit(function(event) {
+			event.preventDefault();
+			myApp.showPleaseWait();
+		
+			var uri = "api?";
+			$.each($('#createUsersWithArrayInput').serializeArray(), function(i, field) {
+				if(uri.charAt(uri.lastIndexOf('/') + 1) == '{' || uri.charAt(uri.lastIndexOf('/') == '?')) {
+					uri = uri.substring(0, uri.lastIndexOf('/')) + uri.substring(uri.lastIndexOf('/') + 1, uri.length);
+				}
+				uri = uri.replace('{' + field.name + '}', '');
+				uri = uri + field.name + "=" + field.value + "&";
+			});
+					
+			uri = uri.substring(0, uri.length-1);
+		
+			$.ajax({
+			  url : uri,
+			  type: 'POST',
+			  error: function() {
+				alert("Submission failure");
+				myApp.hidePleaseWait();
+			  },
+			  
+			  complete: function(res) {
+			  },
+			  
+			  success: function(res) {
+				myApp.hidePleaseWait();
+				myApp.showMessage(res);
+			  }
+			});        	  
+		  });
+	  </script>
+	<div class="col-lg-12">
+		<h4>findPetsByTags</h4>
+		<p>Multiple tags can be provided with comma separated strings. Use tag1, tag2, tag3 for testing.</p>
+		<form class="navbar-form navbar-left" id="findPetsByTags" role="search">
+			<div class="input-group">
+			    <span class="input-group-addon" id="basic-addon1">tags</span>
+			    <input type="text" class="form-control" name="tags" placeholder="tags" aria-describedby="basic-addon1">
+			    </input>
+			</div>
+			<button type="submit" class="btn btn-success">Run <span class="glyphicon glyphicon-play-circle" aria-hidden="true">
+				</span>
+			</button>
+		</form>
+	</div>
+	<script>
+		$("#findPetsByTags").submit(function(event) {
+			event.preventDefault();
+			myApp.showPleaseWait();
+		
+			var uri = "api?";
+			$.each($('#findPetsByTags').serializeArray(), function(i, field) {
+				if(uri.charAt(uri.lastIndexOf('/') + 1) == '{' || uri.charAt(uri.lastIndexOf('/') == '?')) {
+					uri = uri.substring(0, uri.lastIndexOf('/')) + uri.substring(uri.lastIndexOf('/') + 1, uri.length);
+				}
+				uri = uri.replace('{' + field.name + '}', '');
+				uri = uri + field.name + "=" + field.value + "&";
+			});
+					
+			uri = uri.substring(0, uri.length-1);
+		
+			$.ajax({
+			  url : uri,
+			  type: 'GET',
+			  error: function() {
+				alert("Submission failure");
+				myApp.hidePleaseWait();
+			  },
+			  
+			  complete: function(res) {
+			  },
+			  
+			  success: function(res) {
+				myApp.hidePleaseWait();
+				myApp.showMessage(res);
+			  }
+			});        	  
+		  });
+	  </script>
+	<div class="col-lg-12">
+		<h4>placeOrder</h4>
+		<p></p>
+		<form class="navbar-form navbar-left" id="placeOrder" role="search">
+			<div class="input-group">
+			    <span class="input-group-addon" id="basic-addon1">body</span>
+			    <input type="text" class="form-control" name="body" placeholder="body" aria-describedby="basic-addon1">
+			    </input>
+			</div>
+			<button type="submit" class="btn btn-success">Run <span class="glyphicon glyphicon-play-circle" aria-hidden="true">
+				</span>
+			</button>
+		</form>
+	</div>
+	<script>
+		$("#placeOrder").submit(function(event) {
+			event.preventDefault();
+			myApp.showPleaseWait();
+		
+			var uri = "api?";
+			$.each($('#placeOrder').serializeArray(), function(i, field) {
+				if(uri.charAt(uri.lastIndexOf('/') + 1) == '{' || uri.charAt(uri.lastIndexOf('/') == '?')) {
+					uri = uri.substring(0, uri.lastIndexOf('/')) + uri.substring(uri.lastIndexOf('/') + 1, uri.length);
+				}
+				uri = uri.replace('{' + field.name + '}', '');
+				uri = uri + field.name + "=" + field.value + "&";
+			});
+					
+			uri = uri.substring(0, uri.length-1);
+		
+			$.ajax({
+			  url : uri,
+			  type: 'POST',
+			  error: function() {
+				alert("Submission failure");
+				myApp.hidePleaseWait();
+			  },
+			  
+			  complete: function(res) {
+			  },
+			  
+			  success: function(res) {
+				myApp.hidePleaseWait();
+				myApp.showMessage(res);
+			  }
+			});        	  
+		  });
+	  </script>
+	<div class="col-lg-12">
+		<h4>logoutUser</h4>
+		<p></p>
+		<form class="navbar-form navbar-left" id="logoutUser" role="search">
+			<button type="submit" class="btn btn-success">Run <span class="glyphicon glyphicon-play-circle" aria-hidden="true">
+				</span>
+			</button>
+		</form>
+	</div>
+	<script>
+		$("#logoutUser").submit(function(event) {
+			event.preventDefault();
+			myApp.showPleaseWait();
+		
+			var uri = "api?";
+			$.each($('#logoutUser').serializeArray(), function(i, field) {
+				if(uri.charAt(uri.lastIndexOf('/') + 1) == '{' || uri.charAt(uri.lastIndexOf('/') == '?')) {
+					uri = uri.substring(0, uri.lastIndexOf('/')) + uri.substring(uri.lastIndexOf('/') + 1, uri.length);
+				}
+				uri = uri.replace('{' + field.name + '}', '');
+				uri = uri + field.name + "=" + field.value + "&";
+			});
+					
+			uri = uri.substring(0, uri.length-1);
+		
+			$.ajax({
+			  url : uri,
+			  type: 'GET',
+			  error: function() {
+				alert("Submission failure");
+				myApp.hidePleaseWait();
+			  },
+			  
+			  complete: function(res) {
+			  },
+			  
+			  success: function(res) {
+				myApp.hidePleaseWait();
+				myApp.showMessage(res);
+			  }
+			});        	  
+		  });
+	  </script>
+	<div class="col-lg-12">
+		<h4>getPetById</h4>
+		<p>Returns a single pet</p>
+		<form class="navbar-form navbar-left" id="getPetById" role="search">
+			<div class="input-group">
+			    <span class="input-group-addon" id="basic-addon1">petId</span>
+			    <input type="text" class="form-control" name="petId" placeholder="petId" aria-describedby="basic-addon1">
+			    </input>
+			</div>
+			<button type="submit" class="btn btn-success">Run <span class="glyphicon glyphicon-play-circle" aria-hidden="true">
+				</span>
+			</button>
+		</form>
+	</div>
+	<script>
+		$("#getPetById").submit(function(event) {
+			event.preventDefault();
+			myApp.showPleaseWait();
+		
+			var uri = "api?";
+			$.each($('#getPetById').serializeArray(), function(i, field) {
+				if(uri.charAt(uri.lastIndexOf('/') + 1) == '{' || uri.charAt(uri.lastIndexOf('/') == '?')) {
+					uri = uri.substring(0, uri.lastIndexOf('/')) + uri.substring(uri.lastIndexOf('/') + 1, uri.length);
+				}
+				uri = uri.replace('{' + field.name + '}', '');
+				uri = uri + field.name + "=" + field.value + "&";
+			});
+					
+			uri = uri.substring(0, uri.length-1);
+		
+			$.ajax({
+			  url : uri,
+			  type: 'GET',
+			  error: function() {
+				alert("Submission failure");
+				myApp.hidePleaseWait();
+			  },
+			  
+			  complete: function(res) {
+			  },
+			  
+			  success: function(res) {
+				myApp.hidePleaseWait();
+				myApp.showMessage(res);
+			  }
+			});        	  
+		  });
+	  </script>
+	<div class="col-lg-12">
+		<h4>updatePetWithForm</h4>
+		<p></p>
+		<form class="navbar-form navbar-left" id="updatePetWithForm" role="search">
+			<div class="input-group">
+			    <span class="input-group-addon" id="basic-addon1">petId</span>
+			    <input type="text" class="form-control" name="petId" placeholder="petId" aria-describedby="basic-addon1">
+			    </input>
+			</div>
+			<div class="input-group">
+			    <span class="input-group-addon" id="basic-addon1">name</span>
+			    <input type="text" class="form-control" name="name" placeholder="name" aria-describedby="basic-addon1">
+			    </input>
+			</div>
+			<div class="input-group">
+			    <span class="input-group-addon" id="basic-addon1">status</span>
+			    <input type="text" class="form-control" name="status" placeholder="status" aria-describedby="basic-addon1">
+			    </input>
+			</div>
+			<button type="submit" class="btn btn-success">Run <span class="glyphicon glyphicon-play-circle" aria-hidden="true">
+				</span>
+			</button>
+		</form>
+	</div>
+	<script>
+		$("#updatePetWithForm").submit(function(event) {
+			event.preventDefault();
+			myApp.showPleaseWait();
+		
+			var uri = "api?";
+			$.each($('#updatePetWithForm').serializeArray(), function(i, field) {
+				if(uri.charAt(uri.lastIndexOf('/') + 1) == '{' || uri.charAt(uri.lastIndexOf('/') == '?')) {
+					uri = uri.substring(0, uri.lastIndexOf('/')) + uri.substring(uri.lastIndexOf('/') + 1, uri.length);
+				}
+				uri = uri.replace('{' + field.name + '}', '');
+				uri = uri + field.name + "=" + field.value + "&";
+			});
+					
+			uri = uri.substring(0, uri.length-1);
+		
+			$.ajax({
+			  url : uri,
+			  type: 'POST',
+			  error: function() {
+				alert("Submission failure");
+				myApp.hidePleaseWait();
+			  },
+			  
+			  complete: function(res) {
+			  },
+			  
+			  success: function(res) {
+				myApp.hidePleaseWait();
+				myApp.showMessage(res);
+			  }
+			});        	  
+		  });
+	  </script>
+	<div class="col-lg-12">
+		<h4>deletePet</h4>
+		<p></p>
+		<form class="navbar-form navbar-left" id="deletePet" role="search">
+			<div class="input-group">
+			    <span class="input-group-addon" id="basic-addon1">petId</span>
+			    <input type="text" class="form-control" name="petId" placeholder="petId" aria-describedby="basic-addon1">
+			    </input>
+			</div>
+			<button type="submit" class="btn btn-success">Run <span class="glyphicon glyphicon-play-circle" aria-hidden="true">
+				</span>
+			</button>
+		</form>
+	</div>
+	<script>
+		$("#deletePet").submit(function(event) {
+			event.preventDefault();
+			myApp.showPleaseWait();
+		
+			var uri = "api?";
+			$.each($('#deletePet').serializeArray(), function(i, field) {
+				if(uri.charAt(uri.lastIndexOf('/') + 1) == '{' || uri.charAt(uri.lastIndexOf('/') == '?')) {
+					uri = uri.substring(0, uri.lastIndexOf('/')) + uri.substring(uri.lastIndexOf('/') + 1, uri.length);
+				}
+				uri = uri.replace('{' + field.name + '}', '');
+				uri = uri + field.name + "=" + field.value + "&";
+			});
+					
+			uri = uri.substring(0, uri.length-1);
+		
+			$.ajax({
+			  url : uri,
+			  type: 'DELETE',
+			  error: function() {
+				alert("Submission failure");
+				myApp.hidePleaseWait();
+			  },
+			  
+			  complete: function(res) {
+			  },
+			  
+			  success: function(res) {
+				myApp.hidePleaseWait();
+				myApp.showMessage(res);
+			  }
+			});        	  
+		  });
+	  </script>
+	<div class="col-lg-12">
+		<h4>getOrderById</h4>
+		<p>For valid response try integer IDs with value >= 1 and <= 10. Other values will generated exceptions</p>
+		<form class="navbar-form navbar-left" id="getOrderById" role="search">
+			<div class="input-group">
+			    <span class="input-group-addon" id="basic-addon1">orderId</span>
+			    <input type="text" class="form-control" name="orderId" placeholder="orderId" aria-describedby="basic-addon1">
+			    </input>
+			</div>
+			<button type="submit" class="btn btn-success">Run <span class="glyphicon glyphicon-play-circle" aria-hidden="true">
+				</span>
+			</button>
+		</form>
+	</div>
+	<script>
+		$("#getOrderById").submit(function(event) {
+			event.preventDefault();
+			myApp.showPleaseWait();
+		
+			var uri = "api?";
+			$.each($('#getOrderById').serializeArray(), function(i, field) {
+				if(uri.charAt(uri.lastIndexOf('/') + 1) == '{' || uri.charAt(uri.lastIndexOf('/') == '?')) {
+					uri = uri.substring(0, uri.lastIndexOf('/')) + uri.substring(uri.lastIndexOf('/') + 1, uri.length);
+				}
+				uri = uri.replace('{' + field.name + '}', '');
+				uri = uri + field.name + "=" + field.value + "&";
+			});
+					
+			uri = uri.substring(0, uri.length-1);
+		
+			$.ajax({
+			  url : uri,
+			  type: 'GET',
+			  error: function() {
+				alert("Submission failure");
+				myApp.hidePleaseWait();
+			  },
+			  
+			  complete: function(res) {
+			  },
+			  
+			  success: function(res) {
+				myApp.hidePleaseWait();
+				myApp.showMessage(res);
+			  }
+			});        	  
+		  });
+	  </script>
+	<div class="col-lg-12">
+		<h4>deleteOrder</h4>
+		<p>For valid response try integer IDs with positive integer value. Negative or non-integer values will generate API errors</p>
+		<form class="navbar-form navbar-left" id="deleteOrder" role="search">
+			<div class="input-group">
+			    <span class="input-group-addon" id="basic-addon1">orderId</span>
+			    <input type="text" class="form-control" name="orderId" placeholder="orderId" aria-describedby="basic-addon1">
+			    </input>
+			</div>
+			<button type="submit" class="btn btn-success">Run <span class="glyphicon glyphicon-play-circle" aria-hidden="true">
+				</span>
+			</button>
+		</form>
+	</div>
+	<script>
+		$("#deleteOrder").submit(function(event) {
+			event.preventDefault();
+			myApp.showPleaseWait();
+		
+			var uri = "api?";
+			$.each($('#deleteOrder').serializeArray(), function(i, field) {
+				if(uri.charAt(uri.lastIndexOf('/') + 1) == '{' || uri.charAt(uri.lastIndexOf('/') == '?')) {
+					uri = uri.substring(0, uri.lastIndexOf('/')) + uri.substring(uri.lastIndexOf('/') + 1, uri.length);
+				}
+				uri = uri.replace('{' + field.name + '}', '');
+				uri = uri + field.name + "=" + field.value + "&";
+			});
+					
+			uri = uri.substring(0, uri.length-1);
+		
+			$.ajax({
+			  url : uri,
+			  type: 'DELETE',
+			  error: function() {
+				alert("Submission failure");
+				myApp.hidePleaseWait();
+			  },
+			  
+			  complete: function(res) {
+			  },
+			  
+			  success: function(res) {
+				myApp.hidePleaseWait();
+				myApp.showMessage(res);
+			  }
+			});        	  
+		  });
+	  </script>
+	    		 	
+			</div>
+		</div>
+	<!-- /container -->
+	</body>
+</html>
